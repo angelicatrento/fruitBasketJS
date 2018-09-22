@@ -1,38 +1,34 @@
 //variables
 /** x position of the basket */
-var basketPosX = 50;
-/** y position of the basket */
-var basketPosY = 50;
-/** x position of the basket */
 var pumpkinPosX = 0;
 /** y position of the basket */
 var pumpkinPosY = 10;
-var isRightPressed = 0;
-var isLeftPressed = 0;
+
 var score = 0;
-var basket;
 var scoreElem;
 var pumpkin;
-var width = 640;
-var height = 480;
+var basket;
+
 
 function preload() {
-  basket = loadImage('assets/sprites/basket.png');
+  basket = new Basket();
+  basket.sprite = loadImage('assets/sprites/basket.png');
   pumpkin = loadImage('assets/sprites/pumpkin.png');
 }
 
 
 function setup() {
   // put setup code here
-  scoreElem = createDiv('SCORE: ' + score);
-  scoreElem.position(20, 20);
-  scoreElem.id = 'score';
-  scoreElem.style('color', 'purple');
-  width = 640;
-  height = 480;
-  createCanvas(width,height);
-  basketPosX = 10;
-  basketPosY = height - basket.height - 10;
+  fill(81, 43, 102);
+  text("SCORE: " + score);
+
+  //scoreElem = createDiv('SCORE: ' + score);
+  //scoreElem.position(20, 20);
+  //scoreElem.id = 'score';
+  //scoreElem.style('color', 'purple');
+  basket.x = width/2;
+  basket.y = height - basket.sprite.height;
+  createCanvas(640,480);
   controlDroppedFruits();
 }
 
@@ -43,25 +39,11 @@ function draw() {
   colorMode(RGB);
   // change canvas backgroud color 
   background(223,225,239);
-  loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY);
-  updateBasketPostion();
-  updatePumpkinPosition();
-}
-
-function updateBasketPostion(){
-
-    if (isRightPressed == 1 && isLeftPressed == 0) 
-    {
-        if(((pumpkin.width/10) + basketPosX) < (width - (pumpkin.width+(pumpkin.width/2))))
-            basketPosX = (pumpkin.width/10) + basketPosX
-    }
-    if(isLeftPressed == 1 && isRightPressed == 0)
-    {
-        if(( basketPosX - (pumpkin.width/10) ) > 5)
-            basketPosX = basketPosX - (pumpkin.width/10)
-    }            
     
-    image(basket, basketPosX, basketPosY);
+  loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY);
+  updatePumpkinPosition();
+  basket.MoveBasket();
+  
 }
 
 function controlDroppedFruits(){
@@ -76,29 +58,4 @@ function updatePumpkinPosition() {
     controlDroppedFruits();
     pumpkinPosY = 10;
   }
-}
-
-function keyPressed() {
- 
- switch (keyCode) {
-    case LEFT_ARROW:
-        isLeftPressed = 1;
-      break;
-    case RIGHT_ARROW:
-        isRightPressed = 1;
-      break;
-  }
-  return false;
-}
-
-function keyReleased() {
-  switch (keyCode) {
-    case LEFT_ARROW:
-      isLeftPressed = 0;
-      break;
-    case RIGHT_ARROW:
-      isRightPressed = 0;
-      break;
-  }
-  return false; // prevent any default behavior
 }
