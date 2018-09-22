@@ -19,31 +19,36 @@ function preload() {
 
 function setup() {
   // put setup code here
-  fill(81, 43, 102);
-  text("SCORE: " + score);
-
+  createCanvas(640,480);
   //scoreElem = createDiv('SCORE: ' + score);
   //scoreElem.position(20, 20);
   //scoreElem.id = 'score';
   //scoreElem.style('color', 'purple');
+  
+  
   basket.x = width/2;
-  basket.y = height - basket.sprite.height;
-  createCanvas(640,480);
+  basket.y = height - basket.sprite.height - 5;
   controlDroppedFruits();
 }
 
 function draw() {
   // clearing canvas before drawing
   clear();
+  
   // change color mode to RGB
   colorMode(RGB);
   // change canvas backgroud color 
   background(223,225,239);
-    
+
+
   loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY);
   updatePumpkinPosition();
   basket.MoveBasket();
   
+  //interface 
+  fill(81, 43, 102)
+    .textSize(20)
+    .text("SCORE: " + score,10,20);
 }
 
 function controlDroppedFruits(){
