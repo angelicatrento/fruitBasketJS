@@ -3,19 +3,21 @@ function Basket() {
    this.y = 0;
    this.sprite = null; // Basket sprite
    this.speed = 0; 
-    
+   this.topSpeed = 7;   
+   this.inertia = 0.5;
+
    this.MoveBasket = function() {
-       
+        
         if(!keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)) {
-            if(this.speed > -7){
-                this.speed-=0.5;
+            if(this.speed > -this.topSpeed){
+                this.speed-=this.inertia;
             }
             this.x += this.speed;
         }
         
         if(!keyIsDown(LEFT_ARROW) && keyIsDown(RIGHT_ARROW)) {
-            if(this.speed < 7){
-                this.speed+=0.5;
+            if(this.speed < this.topSpeed){
+                this.speed+=this.inertia;
             }
             this.x += this.speed;
         }
@@ -23,11 +25,11 @@ function Basket() {
         if(!keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW))
         {
             if(this.speed > 0){
-                this.speed-=0.5;
+                this.speed-=this.inertia;
             }
             
             if(this.speed < 0){
-                this.speed+=0.5;
+                this.speed+=this.inertia;
                 
             }
             this.x += this.speed;
