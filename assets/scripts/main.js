@@ -7,7 +7,8 @@ var basketPosY = 50;
 var pumpkinPosX = 0;
 /** y position of the basket */
 var pumpkinPosY = 10;
-var direction = '';
+var isRightPressed = 0;
+var isLeftPressed = 0;
 var score = 0;
 var basket;
 var scoreElem;
@@ -43,18 +44,18 @@ function draw() {
   // change canvas backgroud color 
   background(223,225,239);
   loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY);
-  updateBasketPostion(direction);
+  updateBasketPostion();
   updatePumpkinPosition();
 }
 
 function updateBasketPostion(){
 
-    if (direction == 'right') 
+    if (isRightPressed == 1 && isLeftPressed == 0) 
     {
         if(((pumpkin.width/10) + basketPosX) < (width - (pumpkin.width+(pumpkin.width/2))))
             basketPosX = (pumpkin.width/10) + basketPosX
     }
-    if(direction == 'left')
+    if(isLeftPressed == 1 && isRightPressed == 0)
     {
         if(( basketPosX - (pumpkin.width/10) ) > 5)
             basketPosX = basketPosX - (pumpkin.width/10)
@@ -81,31 +82,23 @@ function keyPressed() {
  
  switch (keyCode) {
     case LEFT_ARROW:
-      if (direction != 'right') {
-        direction = 'left';
-      }
+        isLeftPressed = 1;
       break;
     case RIGHT_ARROW:
-      if (direction != 'left') {
-        direction = 'right';
-      }
-      break;
-    case UP_ARROW:
-      if (direction != 'down') {
-        direction = 'up';
-      }
-      break;
-    case DOWN_ARROW:
-      if (direction != 'up') {
-        direction = 'down';
-      }
+        isRightPressed = 1;
       break;
   }
-  console.log("direction " + direction);
   return false;
 }
 
 function keyReleased() {
-  direction = '';
+  switch (keyCode) {
+    case LEFT_ARROW:
+      isLeftPressed = 0;
+      break;
+    case RIGHT_ARROW:
+      isRightPressed = 0;
+      break;
+  }
   return false; // prevent any default behavior
 }
