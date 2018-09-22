@@ -28,7 +28,10 @@ function Basket() {
             
             if(this.speed < 0){
                 this.speed+=0.5;
+                
             }
+            this.x += this.speed;
+            //console.log("speed " + this.speed);
         }
         
         
