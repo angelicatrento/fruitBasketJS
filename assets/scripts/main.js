@@ -42,9 +42,9 @@ function draw() {
   colorMode(RGB);
   // change canvas backgroud color 
   background(223,225,239);
-  loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY)
+  loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY);
   updateBasketPostion();
-  
+  updatePumpkinPosition();
 }
 
 function updateBasketPostion(){
@@ -53,9 +53,17 @@ function updateBasketPostion(){
 
 function controlDroppedFruits(){
     pumpkinPosX = getRandom(10,width-pumpkin.width);
-    image(pumpkin, pumpkinPosX, pumpkinPosY);
 }
 
 function loadFruitOnCanvas(fruitImage,posX,posY) {
   image(fruitImage, posX, posY);
+}
+
+function updatePumpkinPosition() {
+  pumpkinPosY=pumpkinPosY+(pumpkin.height/10);
+  if(pumpkinPosY + pumpkin.height >= height)
+  {
+    controlDroppedFruits();
+    pumpkinPosY = 10;
+  }
 }
