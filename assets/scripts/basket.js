@@ -22,7 +22,8 @@ function Basket() {
             this.x += this.speed;
         }
 
-        if(!keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW))
+        if((!keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW))
+        ||(keyIsDown(RIGHT_ARROW) && keyIsDown(LEFT_ARROW)))
         {
             if(this.speed > 0){
                 this.speed-=this.inertia;
