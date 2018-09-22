@@ -61,6 +61,7 @@ function loadFruitOnCanvas(fruitImage,posX,posY) {
 
 function updatePumpkinPosition() {
   pumpkinPosY=pumpkinPosY+(pumpkin.height/10);
+  //reloads pumpkin position when it is out of canvas
   if(pumpkinPosY + pumpkin.height >= height)
   {
     controlDroppedFruits();
