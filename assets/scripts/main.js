@@ -7,7 +7,7 @@ var basketPosY = 50;
 var pumpkinPosX = 0;
 /** y position of the basket */
 var pumpkinPosY = 10;
-
+var direction = '';
 var score = 0;
 var basket;
 var scoreElem;
@@ -43,20 +43,28 @@ function draw() {
   // change canvas backgroud color 
   background(223,225,239);
   loadFruitOnCanvas(pumpkin,pumpkinPosX,pumpkinPosY);
-  updateBasketPostion();
+  updateBasketPostion(direction);
   updatePumpkinPosition();
 }
 
 function updateBasketPostion(){
+
+    if (direction == 'right') 
+    {
+        if(((pumpkin.width/10) + basketPosX) < (width - (pumpkin.width+(pumpkin.width/2))))
+            basketPosX = (pumpkin.width/10) + basketPosX
+    }
+    if(direction == 'left')
+    {
+        if(( basketPosX - (pumpkin.width/10) ) > 5)
+            basketPosX = basketPosX - (pumpkin.width/10)
+    }            
+    
     image(basket, basketPosX, basketPosY);
 }
 
 function controlDroppedFruits(){
     pumpkinPosX = getRandom(10,width-pumpkin.width);
-}
-
-function loadFruitOnCanvas(fruitImage,posX,posY) {
-  image(fruitImage, posX, posY);
 }
 
 function updatePumpkinPosition() {
@@ -67,4 +75,37 @@ function updatePumpkinPosition() {
     controlDroppedFruits();
     pumpkinPosY = 10;
   }
+}
+
+function keyPressed() {
+ 
+ switch (keyCode) {
+    case LEFT_ARROW:
+      if (direction != 'right') {
+        direction = 'left';
+      }
+      break;
+    case RIGHT_ARROW:
+      if (direction != 'left') {
+        direction = 'right';
+      }
+      break;
+    case UP_ARROW:
+      if (direction != 'down') {
+        direction = 'up';
+      }
+      break;
+    case DOWN_ARROW:
+      if (direction != 'up') {
+        direction = 'down';
+      }
+      break;
+  }
+  console.log("direction " + direction);
+  return false;
+}
+
+function keyReleased() {
+  direction = '';
+  return false; // prevent any default behavior
 }
