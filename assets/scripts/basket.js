@@ -22,7 +22,13 @@ function Basket() {
 
         if(!keyIsDown(RIGHT_ARROW) && !keyIsDown(LEFT_ARROW))
         {
-            this.speed = 0;
+            if(this.speed > 0){
+                this.speed-=0.5;
+            }
+            
+            if(this.speed < 0){
+                this.speed+=0.5;
+            }
         }
         
         
