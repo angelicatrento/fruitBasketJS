@@ -8,11 +8,36 @@ function Fruit() {
     this.sprite = null; // Basket sprite
     this.speed = 1; 
     this.increaseSpeed = 0.2;
-    this.canvasMinBoundary = 10; 
-
+    this.canvasMinBoundary = -10; 
+    
+    this.fruitPath = [ "assets/sprites/blueberry.png"
+                      ,"assets/sprites/cherry.png"
+                      ,"assets/sprites/grape.png"
+                      ,"assets/sprites/green_apple.png"
+                      ,"assets/sprites/orange.png"
+                      ,"assets/sprites/pear.png"
+                      ,"assets/sprites/pepper.png"
+                      ,"assets/sprites/pumpkin.png"
+                      ,"assets/sprites/red_apple.png"
+                      ,"assets/sprites/strawberry.png"
+                      ,"assets/sprites/tomato.png"
+                     ];
+    this.fruitSprites = [];
+    
+    this.PreLoadFruits = function(){
+        
+        for (count in this.fruitPath) {
+            this.fruitSprites.push(loadImage(this.fruitPath[count]));
+        }
+            
+    }
+    
+    
     this.PlaceFruitInRandomPosition = function() {
+        this.sprite = this.GetRandomFruit();
         this.x = getRandom(this.canvasMinBoundary,width - this.sprite.width);
         this.y = 10;
+        
     }
     
     this.UpdateFruitPosition = function(basketPosX, basketWidth) {
@@ -38,6 +63,10 @@ function Fruit() {
             this.speed += this.increaseSpeed;
             this.PlaceFruitInRandomPosition();
         }
+    }
+    
+    this.GetRandomFruit = function(){
+        return this.fruitSprites[Math.floor(random(0, this.fruitSprites.length))];
     }
     
     

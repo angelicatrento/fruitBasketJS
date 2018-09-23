@@ -11,7 +11,7 @@ function preload() {
     pumpkin = new Fruit(); 
     
     basket.sprite = loadImage('assets/sprites/basket.png');
-    pumpkin.sprite = loadImage('assets/sprites/pumpkin.png');
+    pumpkin.PreLoadFruits();
 }
 
 
