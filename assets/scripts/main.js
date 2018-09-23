@@ -2,16 +2,18 @@
 var score = 0;
 var fruitsLost = 0;
 var maxNumberMisses = 5;
-var pumpkin;
+var fruits = [new Fruit(),new Fruit(),new Fruit()];
 var basket;
-
+var numberOfFruits = 5;
 
 function preload() {
     basket = new Basket();
-    pumpkin = new Fruit(); 
     
     basket.sprite = loadImage('assets/sprites/basket.png');
-    pumpkin.PreLoadFruits();
+    
+    for (count in fruits) {
+        fruits[count].PreLoadFruits();
+    }
 }
 
 
@@ -25,8 +27,11 @@ function setup() {
 
     basket.x = width/2;
     basket.y = height - basket.sprite.height - 5;
-    pumpkin.PlaceFruitInRandomPosition();
-    pumpkin.yThreshold = height - (basket.sprite.height/2);
+    for (count in fruits)
+    {
+        fruits[count].PlaceFruitInRandomPosition();
+        fruits[count].yThreshold = height - (basket.sprite.height/2);    
+    }
 }
 
 function draw() {
@@ -38,7 +43,11 @@ function draw() {
     // change canvas backgroud color 
     background(223,225,239);
     
-    pumpkin.UpdateFruitPosition(basket.x,basket.sprite.width);
+    for (count in fruits)
+    {
+        fruits[count].UpdateFruitPosition(basket.x,basket.sprite.width);
+    }
+    
     basket.MoveBasket();
     
     //interface 

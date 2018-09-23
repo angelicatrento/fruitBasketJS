@@ -36,7 +36,7 @@ function Fruit() {
     this.PlaceFruitInRandomPosition = function() {
         this.sprite = this.GetRandomFruit();
         this.x = getRandom(this.canvasMinBoundary,width - this.sprite.width);
-        this.y = 10;
+        this.y = getRandom(-1000,-10);
         
     }
     
@@ -68,7 +68,5 @@ function Fruit() {
     this.GetRandomFruit = function(){
         return this.fruitSprites[Math.floor(random(0, this.fruitSprites.length))];
     }
-    
-    
-   
+
 }
