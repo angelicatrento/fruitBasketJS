@@ -4,9 +4,10 @@ function Fruit() {
     /** y position of the fruit */
     this.y = 10;
     this.yThreshold = 0;
+    const initialSpeed = 1;
     
     this.sprite = null; // Basket sprite
-    this.speed = 1; 
+    this.speed = initialSpeed; 
     this.increaseSpeed = 0.2;
     this.canvasMinBoundary = -10; 
     
@@ -35,15 +36,15 @@ function Fruit() {
     
     this.PlaceFruitInRandomPosition = function() {
         this.sprite = this.GetRandomFruit();
-        this.x = getRandom(this.canvasMinBoundary,width - this.sprite.width);
+        this.x = getRandom(canvasMinLimit,canvasMaxLimit);
         this.y = getRandom(-1000,-10);
         
     }
     
-    this.UpdateFruitPosition = function(basketPosX, basketWidth) {
+    this.UpdateFruitPosition = function() {
         this.y += this.speed;
 
-        this.CheckForBasket(basketPosX, basketWidth);
+        //this.CheckForBasket(basketPosX,basketPosY, basketWidth,basketHeight);
         
         //reloads pumpkin position when it is out of canvas
         if(this.y >= height - (this.sprite.height/2))
@@ -55,10 +56,26 @@ function Fruit() {
         image(this.sprite, this.x, this.y);
     }
     
-    this.CheckForBasket = function(basketPosX, basketWidth){
+    this.CheckForBasket = function(basketPosX,basketPosY, basketWidth,basketHeight){
                 
-        if (this.y + this.sprite.height > this.yThreshold &&
+       /* if (this.y + this.sprite.height > this.yThreshold &&
         (this.x >= basketPosX && this.x <= (basketPosX + basketWidth))){
+            score += 1;
+            this.speed += this.increaseSpeed;
+            this.PlaceFruitInRandomPosition();
+        }*/
+        
+        fruitInBasket = collideRectRect(basketPosX,this.yThreshold, basketWidth,basketHeight,this.x,this.y,this.sprite.width,this.sprite.height);
+        
+        /*
+        LOG - TODO - ADD COMMAND KEY TO DISPLAY LOGS
+        fill(255,255,0,50);
+        rect(basketPosX,this.yThreshold,basketWidth,basketHeight);
+        fill(255,0,255,50);
+        rect(this.x,this.y,this.sprite.width,this.sprite.height);
+        */
+        
+        if(fruitInBasket){
             score += 1;
             this.speed += this.increaseSpeed;
             this.PlaceFruitInRandomPosition();
@@ -68,5 +85,5 @@ function Fruit() {
     this.GetRandomFruit = function(){
         return this.fruitSprites[Math.floor(random(0, this.fruitSprites.length))];
     }
-
 }
+    
