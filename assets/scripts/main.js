@@ -8,7 +8,7 @@ var numberOfFruits = 5;
 
 var canvasMinLimit = 0;
 var canvasMaxLimit = 0;
-
+const fruitInitialSpeed = 1;
 // =======================================
 // Centralise Canvas:
 // =======================================
@@ -125,7 +125,7 @@ function gameOver(){
         {
             fruits[count].PlaceFruitInRandomPosition();
             fruits[count].yThreshold = height - (basket.sprite.height/2);
-            fruits[count].speed = initialSpeed;
+            fruits[count].speed = fruitInitialSpeed;
         }
     }
 	//rect(mouseX,mouseY,50,75);
