@@ -3,22 +3,30 @@ var score = 0;
 var fruitsLost = 0;
 var maxNumberMisses = 5;
 var fruits = [new Fruit(),new Fruit(),new Fruit()];
-var basket;
-var numberOfFruits = 5;
 
+
+var canvas;
 var canvasMinLimit = 0;
 var canvasMaxLimit = 0;
-const fruitInitialSpeed = 1;
-// =======================================
-// Centralise Canvas:
-// =======================================
-var canvas;
 
+var basket;
+var numberOfFruits = 5;
+const fruitInitialSpeed = 1;
+
+
+// sound variables
+var soundCatchFruit; 
+var backgroundSound; 
+var endGameSound; 
 
 function preload() {
     basket = new Basket();
     
     basket.sprite = loadImage('assets/sprites/basket.png');
+    
+    soundCatchFruit = loadSound("assets/audio/pop.mp3"); 
+    backgroundSound = loadSound("assets/audio/ShanghaiActionLoop.mp3"); 
+    endGameSound = loadSound("assets/audio/ShanghaiActionEnd.mp3"); 
     
     for (count in fruits) {
         fruits[count].PreLoadFruits();
@@ -42,6 +50,9 @@ function setup() {
         fruits[count].PlaceFruitInRandomPosition();
         fruits[count].yThreshold = height - (basket.sprite.height/2);    
     }
+    //loop([startTime], [rate], [amp], [cueLoopStart], [duration]
+    backgroundSound.setVolume(0.1);
+    backgroundSound.loop();
 }
 
 function draw() {
@@ -79,6 +90,9 @@ function draw() {
         .text("MISSES: " + fruitsLost + " of " + maxNumberMisses,10,40);
 }
 
+// =======================================
+// Centralise Canvas:
+// =======================================
 function centerCanvas() {
   canvas.position((windowWidth - width) / 2, (windowHeight - height) / 3);
 }

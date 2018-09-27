@@ -4,10 +4,10 @@ function Fruit() {
     /** y position of the fruit */
     this.y = 10;
     this.yThreshold = 0;
-    const initialSpeed = 1;
+    this.initialSpeed = 1;
     
     this.sprite = null; // Basket sprite
-    this.speed = initialSpeed; 
+    this.speed = this.initialSpeed ; 
     this.increaseSpeed = 0.2;
     this.canvasMinBoundary = -10; 
     
@@ -76,6 +76,7 @@ function Fruit() {
         */
         
         if(fruitInBasket){
+            soundCatchFruit.play();
             score += 1;
             this.speed += this.increaseSpeed;
             this.PlaceFruitInRandomPosition();
