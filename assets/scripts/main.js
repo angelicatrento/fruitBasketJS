@@ -54,7 +54,7 @@ function setup() {
         fruits[count].yThreshold = height - (basket.sprite.height/2);    
     }
     //loop([startTime], [rate], [amp], [cueLoopStart], [duration]
-    backgroundMusic.setVolume(0.1);
+    backgroundMusic.setVolume(0.3);
     backgroundMusic.loop();
 }
 
@@ -83,7 +83,9 @@ function draw() {
     }
     else{
         backgroundMusic.stop();
-        endGameSound.play();
+        
+        if(!endGameSound.isPlaying()) endGameSound.play();
+        
         gameOver();
     }
     
