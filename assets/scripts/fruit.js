@@ -5,11 +5,15 @@ function Fruit() {
     this.y = 10;
     this.yThreshold = 0;
     this.initialSpeed = 1;
+    this.startSplashTime = 0;
     
     this.sprite = null; // Basket sprite
+    this.splash_sprite = null;
+    
     this.speed = this.initialSpeed ; 
     this.increaseSpeed = 0.2;
     this.canvasMinBoundary = -10; 
+    
     
     this.fruitPath = [ "assets/sprites/blueberry.png"
                       ,"assets/sprites/cherry.png"
@@ -23,14 +27,16 @@ function Fruit() {
                       ,"assets/sprites/strawberry.png"
                       ,"assets/sprites/tomato.png"
                      ];
+    this.fruitSplash = "assets/sprites/splash.png";
+    
     this.fruitSprites = [];
     
     this.PreLoadFruits = function(){
-        
+
         for (count in this.fruitPath) {
             this.fruitSprites.push(loadImage(this.fruitPath[count]));
         }
-            
+        this.splash_sprite = loadImage(this.fruitSplash);
     }
     
     
@@ -49,11 +55,16 @@ function Fruit() {
         //reloads pumpkin position when it is out of canvas
         if(this.y >= height - (this.sprite.height/2))
         {
+            this.startSplashTime = millis();
             fruitLostSound.play();
             this.PlaceFruitInRandomPosition();
             fruitsLost += 1;
+            //tint(0, 153, 204);  // Tint blue
         }
-
+        
+        if(this.startSplashTime > 0)
+            this.DoSplash(this.x,this.y);
+            
         image(this.sprite, this.x, this.y);
     }
     
@@ -86,6 +97,14 @@ function Fruit() {
     
     this.GetRandomFruit = function(){
         return this.fruitSprites[Math.floor(random(0, this.fruitSprites.length))];
+    }
+    
+    this.DoSplash = function(x,y){
+        if(millis() < this.startSplashTime+1000){
+             image(this.splash_sprite,x,y);   
+        }else {
+            this.startSplashTime = 0;
+        }
     }
 }
     

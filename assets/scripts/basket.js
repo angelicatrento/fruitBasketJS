@@ -46,7 +46,6 @@ function Basket() {
             this.x = width - (this.sprite.width + 10);
         }
 
-
         image(this.sprite, this.x, this.y);
     } 
 
