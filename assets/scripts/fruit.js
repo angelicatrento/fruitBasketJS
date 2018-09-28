@@ -6,6 +6,8 @@ function Fruit() {
     this.yThreshold = 0;
     this.initialSpeed = 1;
     this.startSplashTime = 0;
+    this.splashPosX = 0;
+    this.splashPosY = 0;
     
     this.sprite = null; // Basket sprite
     this.splash_sprite = null;
@@ -13,6 +15,7 @@ function Fruit() {
     this.speed = this.initialSpeed ; 
     this.increaseSpeed = 0.2;
     this.canvasMinBoundary = -10; 
+    
     
     
     this.fruitPath = [ "assets/sprites/blueberry.png"
@@ -52,14 +55,16 @@ function Fruit() {
 
         //this.CheckForBasket(basketPosX,basketPosY, basketWidth,basketHeight);
         
+        
         if(this.startSplashTime > 0)
-            this.DoSplash(this.x,this.y);
+            this.DoSplash();
         
         //reloads pumpkin position when it is out of canvas
         if(this.y >= height - (this.sprite.height/2))
         {
-            
             this.startSplashTime = millis();
+            this.splashPosX = this.x;
+            this.splashPosY = this.y;
             fruitLostSound.play();
             this.PlaceFruitInRandomPosition();
             fruitsLost += 1;
@@ -100,10 +105,10 @@ function Fruit() {
         return this.fruitSprites[Math.floor(random(0, this.fruitSprites.length))];
     }
     
-    this.DoSplash = function(x,y){
+    this.DoSplash = function(){
         if(millis() < this.startSplashTime+1000){
              tint(0, 153, 204);
-             image(this.splash_sprite,x,y);   
+             image(this.splash_sprite,this.splashPosX,this.splashPosY);   
              noTint();
         }else {
             this.startSplashTime = 0;
