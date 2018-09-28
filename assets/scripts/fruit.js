@@ -52,18 +52,19 @@ function Fruit() {
 
         //this.CheckForBasket(basketPosX,basketPosY, basketWidth,basketHeight);
         
+        if(this.startSplashTime > 0)
+            this.DoSplash(this.x,this.y);
+        
         //reloads pumpkin position when it is out of canvas
         if(this.y >= height - (this.sprite.height/2))
         {
+            
             this.startSplashTime = millis();
             fruitLostSound.play();
             this.PlaceFruitInRandomPosition();
             fruitsLost += 1;
             //tint(0, 153, 204);  // Tint blue
         }
-        
-        if(this.startSplashTime > 0)
-            this.DoSplash(this.x,this.y);
             
         image(this.sprite, this.x, this.y);
     }

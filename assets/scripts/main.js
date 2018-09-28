@@ -31,6 +31,7 @@ function preload() {
     endGameSound = loadSound("assets/audio/ShanghaiActionEnd.mp3"); 
     fruitLostSound = loadSound("assets/audio/fruit_lost.mp3");
     
+    
     for (count in fruits) {
         fruits[count].PreLoadFruits();
     }
@@ -54,6 +55,7 @@ function setup() {
         fruits[count].yThreshold = height - (basket.sprite.height/2);    
     }
     //loop([startTime], [rate], [amp], [cueLoopStart], [duration]
+    endGameSound.setVolume(0.3);
     backgroundMusic.setVolume(0.3);
     backgroundMusic.loop();
 }
@@ -140,7 +142,6 @@ function gameOver(){
     // if button is pressed then game resets (score and all fruit's position)
     if (hit && mouseIsPressed) {
         endGameSound.stop();
-        backgroundMusic.setVolume(0.1);
         backgroundMusic.loop();
         score = 0;
         fruitsLost = 0;
