@@ -101,7 +101,9 @@ function Fruit() {
     
     this.DoSplash = function(x,y){
         if(millis() < this.startSplashTime+1000){
+             tint(0, 153, 204);
              image(this.splash_sprite,x,y);   
+             noTint();
         }else {
             this.startSplashTime = 0;
         }
