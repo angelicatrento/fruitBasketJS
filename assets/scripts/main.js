@@ -16,8 +16,10 @@ const fruitInitialSpeed = 1;
 
 // sound variables
 var soundCatchFruit; 
-var backgroundSound; 
+var backgroundMusic; 
 var endGameSound; 
+var fruitLostSound; 
+
 
 function preload() {
     basket = new Basket();
@@ -25,8 +27,9 @@ function preload() {
     basket.sprite = loadImage('assets/sprites/basket.png');
     
     soundCatchFruit = loadSound("assets/audio/pop.mp3"); 
-    backgroundSound = loadSound("assets/audio/ShanghaiActionLoop.mp3"); 
+    backgroundMusic = loadSound("assets/audio/ShanghaiActionLoop.mp3"); 
     endGameSound = loadSound("assets/audio/ShanghaiActionEnd.mp3"); 
+    fruitLostSound = loadSound("assets/audio/fruit_lost.mp3");
     
     for (count in fruits) {
         fruits[count].PreLoadFruits();
@@ -51,8 +54,8 @@ function setup() {
         fruits[count].yThreshold = height - (basket.sprite.height/2);    
     }
     //loop([startTime], [rate], [amp], [cueLoopStart], [duration]
-    backgroundSound.setVolume(0.1);
-    backgroundSound.loop();
+    backgroundMusic.setVolume(0.1);
+    backgroundMusic.loop();
 }
 
 function draw() {
@@ -79,6 +82,8 @@ function draw() {
         
     }
     else{
+        backgroundMusic.stop();
+        endGameSound.play();
         gameOver();
     }
     
@@ -132,6 +137,9 @@ function gameOver(){
     
     // if button is pressed then game resets (score and all fruit's position)
     if (hit && mouseIsPressed) {
+        endGameSound.stop();
+        backgroundMusic.setVolume(0.1);
+        backgroundMusic.loop();
         score = 0;
         fruitsLost = 0;
         

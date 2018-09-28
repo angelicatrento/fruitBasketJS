@@ -49,6 +49,7 @@ function Fruit() {
         //reloads pumpkin position when it is out of canvas
         if(this.y >= height - (this.sprite.height/2))
         {
+            fruitLostSound.play();
             this.PlaceFruitInRandomPosition();
             fruitsLost += 1;
         }
