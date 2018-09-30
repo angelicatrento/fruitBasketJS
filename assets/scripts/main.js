@@ -12,7 +12,7 @@ var canvasMaxLimit = 0;
 var basket;
 var numberOfFruits = 5;
 const fruitInitialSpeed = 1;
-
+var fruitPathColor;
 
 // sound variables
 var soundCatchFruit; 
@@ -42,13 +42,13 @@ function setup() {
     // put setup code here
     canvas = createCanvas(640, 480);
     centerCanvas();
-
+    
     basket.x = width/2;
     basket.y = height - basket.sprite.height - 5;
     
     canvasMinLimit = 5;
     canvasMaxLimit = width - (basket.sprite.width + 10);
-        
+    
     for (count in fruits)
     {
         fruits[count].PlaceFruitInRandomPosition();

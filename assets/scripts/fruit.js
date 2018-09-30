@@ -33,19 +33,6 @@ function Fruit() {
     
     this.fruitSplash = "assets/sprites/splash.png";
     
-    this.fruitPathColor = [ color(0, 153, 204)
-                      ,color(255, 46, 2)
-                      ,color(0, 153, 204)
-                      ,color(100, 185, 72)
-                      ,color(255, 118, 14)
-                      ,color(209, 198, 28)
-                      ,color(253, 198, 64)
-                      ,color(255, 114, 18)
-                      ,color(186, 68, 58)
-                      ,color(255, 46, 2)
-                      ,color(240, 70, 50)
-                     ];
-    
     this.fruitSprites = [];
     
     this.PreLoadFruits = function(){
@@ -122,7 +109,44 @@ function Fruit() {
     
     this.DoSplash = function(){
         if(millis() < this.startSplashTime+1000){
-             tint(this.fruitPathColor[this.fruitIndex]);
+             console.log("this.fruitIndex " + this.fruitIndex);
+             console.log("fruit " + this.fruitSprites[this.fruitIndex]);
+             switch(this.fruitIndex){
+                    case 0:
+                        tint(0, 153, 204);
+                        break;
+                    case 1:
+                        tint(255, 46, 2);
+                        break;
+                    case 2:
+                        tint(0, 153, 204);
+                        break;
+                    case 3:
+                        tint(100, 185, 72);
+                        break;
+                    case 4:
+                        tint(255, 118, 14);
+                        break;
+                    case 5:
+                        tint(209, 198, 28);
+                        break;
+                    case 6:
+                        tint(253, 198, 64);
+                        break;
+                    case 7:
+                        tint(255, 114, 18);
+                        break;
+                    case 8:
+                        tint(186, 68, 58);
+                        break;
+                    case 9:
+                        tint(255, 46, 2);
+                        break;
+                    case 10:
+                        tint(240, 70, 50);
+                        break;
+                    }
+
              //this.fruitPathColor[this.fruitIndex];
              image(this.splash_sprite,this.splashPosX-25,this.splashPosY-25);   
              noTint();
