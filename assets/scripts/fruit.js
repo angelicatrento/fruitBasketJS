@@ -16,7 +16,7 @@ function Fruit() {
     this.increaseSpeed = 0.2;
     this.canvasMinBoundary = -10; 
     
-    
+    this.fruitIndex = 0;
     
     this.fruitPath = [ "assets/sprites/blueberry.png"
                       ,"assets/sprites/cherry.png"
@@ -30,7 +30,21 @@ function Fruit() {
                       ,"assets/sprites/strawberry.png"
                       ,"assets/sprites/tomato.png"
                      ];
+    
     this.fruitSplash = "assets/sprites/splash.png";
+    
+    this.fruitPathColor = [ color(0, 153, 204)
+                      ,color(255, 46, 2)
+                      ,color(0, 153, 204)
+                      ,color(100, 185, 72)
+                      ,color(255, 118, 14)
+                      ,color(209, 198, 28)
+                      ,color(253, 198, 64)
+                      ,color(255, 114, 18)
+                      ,color(186, 68, 58)
+                      ,color(255, 46, 2)
+                      ,color(240, 70, 50)
+                     ];
     
     this.fruitSprites = [];
     
@@ -102,12 +116,14 @@ function Fruit() {
     }
     
     this.GetRandomFruit = function(){
-        return this.fruitSprites[Math.floor(random(0, this.fruitSprites.length))];
+        this.fruitIndex = Math.floor(random(0, this.fruitSprites.length));
+        return this.fruitSprites[this.fruitIndex];
     }
     
     this.DoSplash = function(){
         if(millis() < this.startSplashTime+1000){
-             tint(0, 153, 204);
+             tint(this.fruitPathColor[this.fruitIndex]);
+             //this.fruitPathColor[this.fruitIndex];
              image(this.splash_sprite,this.splashPosX-25,this.splashPosY-25);   
              noTint();
         }else {
