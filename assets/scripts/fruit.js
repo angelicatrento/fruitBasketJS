@@ -4,7 +4,7 @@ function Fruit() {
     /** y position of the fruit */
     this.y = 10;
     this.yThreshold = 0;
-    this.initialSpeed = 1;
+    this.initialSpeed = 2;
     this.startSplashTime = 0;
     this.splashPosX = 0;
     this.splashPosY = 0;
@@ -13,9 +13,9 @@ function Fruit() {
     this.splash_sprite = null;
     
     this.speed = this.initialSpeed ; 
-    this.increaseSpeed = 0.2;
+    this.increaseSpeed = 0.3;
     this.canvasMinBoundary = -10; 
-    
+    this.previousFruitIndex = 0;
     this.fruitIndex = 0;
     
     this.fruitPath = [ "assets/sprites/blueberry.png"
@@ -103,15 +103,15 @@ function Fruit() {
     }
     
     this.GetRandomFruit = function(){
+        this.previousFruitIndex = this.fruitIndex;
         this.fruitIndex = Math.floor(random(0, this.fruitSprites.length));
         return this.fruitSprites[this.fruitIndex];
     }
     
     this.DoSplash = function(){
         if(millis() < this.startSplashTime+1000){
-             console.log("this.fruitIndex " + this.fruitIndex);
-             console.log("fruit " + this.fruitSprites[this.fruitIndex]);
-             switch(this.fruitIndex){
+
+             switch(this.previousFruitIndex){
                     case 0:
                         tint(0, 153, 204);
                         break;
